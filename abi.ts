@@ -1,8 +1,5 @@
-const ethers = require("ethers");
-require("dotenv").config();
-
-const uniswapAddress = "0xC75650fe4D14017b1e12341A97721D5ec51D5340";
-const uniswapABI = [
+export const uniswapAddress = "0xC75650fe4D14017b1e12341A97721D5ec51D5340";
+export const uniswapABI = [
   {
     inputs: [],
     payable: false,
@@ -715,21 +712,3 @@ const uniswapABI = [
     type: "function",
   },
 ];
-
-const provider = new ethers.JsonRpcProvider(
-  `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`
-);
-
-const doSomethingWithBlockNumber = async () => {
-  const blockNumber = await provider.getBlockNumber();
-  const contract = await new ethers.Contract(
-    uniswapABI,
-    uniswapAddress,
-    provider
-  );
-
-  console.log("contract", contract);
-  // DO SOMETHING
-};
-
-doSomethingWithBlockNumber();
