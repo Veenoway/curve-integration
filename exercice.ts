@@ -1,8 +1,11 @@
+const ethers = require("ethers");
 require("dotenv").config();
-const { ethers } = require("ethers");
 
-const provider = new ethers.providers.JsonRpcProvider(
+const provider = new ethers.JsonRpcProvider(
   `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`
 );
 
-console.log("provider", provider);
+const doSomethingWithBlockNumber = async () => {
+  const blockNumber = await provider.getBlockNumber();
+  // DO SOMETHING
+};
