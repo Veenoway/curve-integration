@@ -2,7 +2,7 @@ const ethers = require("ethers");
 const fs = require("fs");
 require("dotenv").config();
 
-const uniswapAddress = "0xC75650fe4D14017b1e12341A97721D5ec51D5340";
+const uniswapAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
 const uniswapABI = [
   {
     anonymous: false,
@@ -51,14 +51,15 @@ const uniswapABI = [
 
 const PAIR_ADDRESS = "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852";
 
-const provider = new ethers.JsonRpcProvider(
+const provider = new ethers.providers.JsonRpcProvider(
   `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`
 );
 const swapEventListener = async () => {
-  const blockNumber = provider.getBlockNumber();
+  const blockNumber = await provider.getBlockNumber();
   const contract = new ethers.Contract(PAIR_ADDRESS, uniswapABI, provider);
 
-  contract.on("Swap", (event) => {
+  contract.on("Swap", async (event) => {
+    console.log("event", event);
     const events = JSON.stringify(event);
 
     fs.appendFile("swap.json", events + "\n", (err) => {
@@ -67,4 +68,5 @@ const swapEventListener = async () => {
     });
   });
 };
+
 swapEventListener();
