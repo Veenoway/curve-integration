@@ -2,6 +2,15 @@ const ethers = require("ethers");
 const fs = require("fs");
 require("dotenv").config();
 
+interface SwapEventProps {
+  sender: string;
+  amount0In: string;
+  amount1In: string;
+  amount0Out: string;
+  amount1Out: string;
+  to: string;
+}
+
 const uniswapAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
 const uniswapABI = [
   {
@@ -58,15 +67,24 @@ const swapEventListener = async () => {
   const blockNumber = await provider.getBlockNumber();
   const contract = new ethers.Contract(PAIR_ADDRESS, uniswapABI, provider);
 
-  contract.on("Swap", async (event) => {
-    console.log("event", event);
-    const events = JSON.stringify(event);
-
-    fs.appendFile("swap.json", events + "\n", (err) => {
-      if (err) throw err;
-      console.log("Swap event saved!", events);
-    });
-  });
+  contract.on(
+    "Swap",
+    (sender, amount0In, amount1In, amount0Out, amount1Out, to) => {
+      const events: SwapEventProps = {
+        sender,
+        amount0In,
+        amount1In,
+        amount0Out,
+        amount1Out,
+        to,
+      };
+      const swapEvent = JSON.stringify(events);
+      fs.appendFile("swap.json", swapEvent + ",", (err) => {
+        if (err) throw err;
+        console.log("Swap event saved!");
+      });
+    }
+  );
 };
 
 swapEventListener();
