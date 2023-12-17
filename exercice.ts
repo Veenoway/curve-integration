@@ -721,14 +721,16 @@ const USDT_UNISWAP_ADDRESS = "0x5ac13261c181a9c3938BfE1b649E65D10F98566B";
 const provider = new ethers.JsonRpcProvider(
   `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`
 );
+const swapEventListener = async () => {
+  const blockNumber = provider.getBlockNumber();
+  const contract = new ethers.Contract(
+    USDT_UNISWAP_ADDRESS,
+    uniswapABI,
+    provider
+  );
 
-const blockNumber = provider.getBlockNumber();
-const contract = new ethers.Contract(
-  USDT_UNISWAP_ADDRESS,
-  uniswapABI,
-  provider
-);
-
-contract.on("Swap", (event) => {
-  console.log("Swap event detected:", event);
-});
+  contract.on("Swap", (event) => {
+    console.log("Swap event detected:", event);
+  });
+};
+swapEventListener();
