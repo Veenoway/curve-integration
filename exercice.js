@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,60 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const ethers = require("ethers");
-const fs = require("fs");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const ethers_1 = require("ethers");
+const fs_1 = __importDefault(require("fs"));
+const abi_1 = require("./abi");
 require("dotenv").config();
-const uniswapAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
-const uniswapABI = [
-    {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: true,
-                internalType: "address",
-                name: "sender",
-                type: "address",
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "amount0In",
-                type: "uint256",
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "amount1In",
-                type: "uint256",
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "amount0Out",
-                type: "uint256",
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "amount1Out",
-                type: "uint256",
-            },
-            {
-                indexed: true,
-                internalType: "address",
-                name: "to",
-                type: "address",
-            },
-        ],
-        name: "Swap",
-        type: "event",
-    },
-];
-const PAIR_ADDRESS = "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852";
-const provider = new ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`);
-const swapEventListener = () => __awaiter(this, void 0, void 0, function* () {
+const provider = new ethers_1.ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`);
+const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
     const blockNumber = yield provider.getBlockNumber();
-    const contract = new ethers.Contract(PAIR_ADDRESS, uniswapABI, provider);
+    const contract = new ethers_1.ethers.Contract(abi_1.PAIR_ADDRESS, abi_1.UNISWAP_ABI, provider);
     contract.on("Swap", (sender, amount0In, amount1In, amount0Out, amount1Out, to) => {
         const events = {
             sender,
@@ -71,7 +30,7 @@ const swapEventListener = () => __awaiter(this, void 0, void 0, function* () {
             to,
         };
         const swapEvent = JSON.stringify(events);
-        fs.appendFile("swap.json", swapEvent + ",", (err) => {
+        fs_1.default.appendFile("swap.json", swapEvent + ",", (err) => {
             if (err)
                 throw err;
             console.log("Swap event saved!");
