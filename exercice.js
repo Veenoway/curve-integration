@@ -31,13 +31,17 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
             to,
         };
         const swapEvent = JSON.stringify(events);
+        const inAmount = (0, utils_1.getAmount)(amount0In, amount1In);
+        const outAmount = (0, utils_1.getAmount)(amount0Out, amount1Out);
         fs_1.default.appendFile("swap.json", swapEvent + ",", (err) => {
             if (err)
                 throw err;
             if (utils_1.routerName[sender])
-                console.log("Swap has been recorded from: ", utils_1.routerName[sender].name);
+                (0, utils_1.getLog)("Swap has been recorded from: ", inAmount, outAmount, sender);
+            else if (utils_1.routerName[to])
+                (0, utils_1.getLog)("Swap has been recorded to: ", inAmount, outAmount, to);
             else
-                console.log("Swap event saved!");
+                (0, utils_1.getLog)("Swap event saved! ", inAmount, outAmount);
         });
     });
 });
