@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import fs from "fs";
 import { PAIR_ADDRESS, UNISWAP_ABI } from "./abi";
 import { SwapEventProps } from "./interface";
+import { routerName } from "./utils";
 require("dotenv").config();
 
 const provider = new ethers.providers.JsonRpcProvider(
@@ -25,7 +26,11 @@ const swapEventListener = async () => {
       const swapEvent = JSON.stringify(events);
       fs.appendFile("swap.json", swapEvent + ",", (err) => {
         if (err) throw err;
-        console.log("Swap event saved!");
+        if (routerName[sender])
+          console.log("Swap has been recorded from: ", routerName[sender].name);
+        else if (routerName[to])
+          console.log("Swap has been recorded to: ", routerName[to].name);
+        else console.log("Swap event saved!");
       });
     }
   );

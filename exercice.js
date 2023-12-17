@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ethers_1 = require("ethers");
 const fs_1 = __importDefault(require("fs"));
 const abi_1 = require("./abi");
+const utils_1 = require("./utils");
 require("dotenv").config();
 const provider = new ethers_1.ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`);
 const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,7 +34,10 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
         fs_1.default.appendFile("swap.json", swapEvent + ",", (err) => {
             if (err)
                 throw err;
-            console.log("Swap event saved!");
+            if (utils_1.routerName[sender])
+                console.log("Swap has been recorded from: ", utils_1.routerName[sender].name);
+            else
+                console.log("Swap event saved!");
         });
     });
 });
