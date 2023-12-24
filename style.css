@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+}
+
+.first-section,
+.second-section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-section {
+  background-color: rebeccapurple;
+}
+
+.second-section {
+  background-color: orange;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  background-color: green;
+}
