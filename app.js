@@ -42,7 +42,7 @@ tl.to(
     y: () => {
       const secondBox = document.querySelector(".second-box");
       const logo = document.querySelector(".logo");
-
+      console.log("secondBox.offsetTop", secondBox.offsetTop);
       const secondBoxCenterY = secondBox.offsetTop + secondBox.offsetHeight / 2;
       const logoCenterY = logo.offsetTop + logo.offsetHeight / 2;
 
@@ -104,6 +104,99 @@ gsap.fromTo(
     delay: 4,
     scrollTrigger: {
       trigger: ".second-box",
+      start: "top+=100 center",
+      end: "center+=100 center",
+      scrub: true,
+      toggleActions: "restart none none none",
+    },
+  }
+);
+
+gsap.to(".description", {
+  scrollTrigger: {
+    trigger: ".third-box",
+    start: "bottom center",
+    end: "bottom center",
+    scrub: true,
+    pin: true,
+    toggleActions: "restart none none none",
+  },
+});
+
+const secondTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".second-box",
+    start: "center 40%",
+    end: "center -30%",
+    markers: true,
+    scrub: true,
+    toggleActions: "restart none none none",
+    //          onEnter, onLeave, onEnterBack, onLeaveBack
+    // options: play, pause, resume, reset, restart, complete, reverse, none
+  },
+});
+
+secondTimeline.to(".logo", {
+  y: "+=500",
+  x: "-=150",
+  scale: 1.9,
+  rotate: "+=140",
+  duration: 6,
+});
+
+secondTimeline.to(
+  ".logo",
+  {
+    x: "-=580",
+    y: () => {
+      const thirdBox = document.querySelector(".third-box");
+      const distance = thirdBox.offsetHeight * 2;
+      const logo = document.querySelector(".logo");
+
+      const thirdBoxCenterY = distance + thirdBox.offsetHeight / 2;
+
+      const logoCenterY = logo.offsetTop + logo.offsetHeight / 2;
+
+      return thirdBoxCenterY - logoCenterY;
+    },
+    rotate: "+=220",
+    duration: 6,
+  },
+  ">=0"
+);
+
+gsap.fromTo(
+  ".subtitle-bis",
+  {
+    x: +200,
+    opacity: 0,
+  },
+  {
+    x: 0,
+    opacity: 1,
+    duration: 4,
+    scrollTrigger: {
+      trigger: ".second-box",
+      start: "bottom center",
+      end: "bottom 0%",
+      scrub: true,
+      toggleActions: "restart none none none",
+      //          onEnter, onLeave, onEnterBack, onLeaveBack
+      // options: play, pause, resume, reset, restart, complete, reverse, none
+    },
+  }
+);
+
+gsap.fromTo(
+  ".description-bis",
+  { x: +100, opacity: 0 },
+  {
+    x: 0,
+    opacity: 1,
+    duration: 4,
+    delay: 4,
+    scrollTrigger: {
+      trigger: ".third-box",
       start: "top+=100 center",
       end: "center+=100 center",
       scrub: true,
