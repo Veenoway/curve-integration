@@ -22,6 +22,12 @@ body {
   background-color: green;
 }
 
+.square2 {
+  width: 150px;
+  height: 150px;
+  background-color: rebeccapurple;
+}
+
 .red {
   background-color: red;
 }
