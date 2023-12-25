@@ -14,15 +14,16 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* background-color: blue; */
 }
 
 .second-box {
   /* background-color: orange; */
+  display: flex;
+  align-items: center;
 }
 
 .square {
-  width: 150px;
-  height: 150px;
   background-color: green;
 }
 
@@ -44,4 +45,33 @@ body {
   line-height: 90px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-bottom: 20px;
+}
+
+.description,
+.subtitle {
+  font-family: "Lobster", sans-serif;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-left: 5%;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 72px;
+  line-height: 50px;
+  margin-bottom: 0px;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 24px;
+  letter-spacing: 1px;
+  line-height: 25px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-left: 5%;
+}
+
+.mid-width {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
