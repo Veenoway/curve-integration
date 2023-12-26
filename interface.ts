@@ -28,3 +28,11 @@ export interface PoolsEventProps {
 }
 export interface PlainPoolEventProps
   extends Omit<PoolsEventProps, "base_pool"> {}
+
+export interface LiquidityDepositEventProps {
+  provider: string;
+  token_amounts: number[];
+  fees: number[];
+  invariant: number;
+  token_supply: number;
+}

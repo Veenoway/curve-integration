@@ -60,6 +60,30 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
     const factoryContract = new ethers_1.ethers.Contract(abi_1.CURVE_FACTORY_ADDRESS, abi_1.CURVE_FACTORY_ABI, provider);
     factoryContract.on("MetaPoolDeployed", (coin, base_pool, a, fee, deployer) => {
         console.log(coin, base_pool, a, fee, deployer);
+        const pools = {
+            coin,
+            base_pool,
+            A: a,
+            fee,
+            deployer,
+        };
+        const poolsToString = JSON.stringify(pools);
+        fs_1.default.appendFile("pools.json", poolsToString, "utf8", () => {
+            console.log("New meta pool created!");
+        });
+    });
+    factoryContract.on("PlainPoolDeployed", (coin, base_pool, a, fee, deployer) => {
+        console.log(coin, base_pool, a, fee, deployer);
+        const pools = {
+            coin,
+            A: a,
+            fee,
+            deployer,
+        };
+        const poolsToString = JSON.stringify(pools);
+        fs_1.default.appendFile("plain_pools.json", poolsToString, "utf8", () => {
+            console.log("New plain pool created!");
+        });
     });
 });
 swapEventListener();

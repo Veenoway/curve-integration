@@ -40,6 +40,19 @@
     "tokens_sold": { "type": "BigNumber", "hex": "0x94979cc5" },
     "bought_id": { "type": "BigNumber", "hex": "0x01" },
     "tokens_bought": { "type": "BigNumber", "hex": "0x949ba53c" }
+  },
+  {
+    "buyer": "0xF0d4c12A5768D806021F80a262B4d39d26C58b8D",
+    "sold_id": { "type": "BigNumber", "hex": "0x00" },
+    "tokens_sold": { "type": "BigNumber", "hex": "0x34f086f3b33b68400000" },
+    "bought_id": { "type": "BigNumber", "hex": "0x02" },
+    "tokens_bought": { "type": "BigNumber", "hex": "0x3a3050c514" }
+  },
+  {
+    "buyer": "0xfBcD3425b88B9402f854FF29A3Bb044C5dA760DE",
+    "sold_id": { "type": "BigNumber", "hex": "0x01" },
+    "tokens_sold": { "type": "BigNumber", "hex": "0x04a817c800" },
+    "bought_id": { "type": "BigNumber", "hex": "0x00" },
+    "tokens_bought": { "type": "BigNumber", "hex": "0x043c1d08eae790d233f2" }
   }
 ]
-{"buyer":"0xF0d4c12A5768D806021F80a262B4d39d26C58b8D","sold_id":{"type":"BigNumber","hex":"0x00"},"tokens_sold":{"type":"BigNumber","hex":"0x34f086f3b33b68400000"},"bought_id":{"type":"BigNumber","hex":"0x02"},"tokens_bought":{"type":"BigNumber","hex":"0x3a3050c514"}}
