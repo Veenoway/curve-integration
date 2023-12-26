@@ -18,3 +18,13 @@ export interface RemoveLiquidityEventProps {
   fees: number[];
   token_supply: number;
 }
+
+export interface PoolsEventProps {
+  coin: string;
+  base_pool: string;
+  A: number;
+  fee: number;
+  deployer: string;
+}
+export interface PlainPoolEventProps
+  extends Omit<PoolsEventProps, "base_pool"> {}

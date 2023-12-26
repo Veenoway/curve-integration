@@ -1,7 +1,9 @@
 import { ethers } from "ethers";
 import fs from "fs";
-import { CURVE_ABI } from "./abi";
+import { CURVE_ABI, CURVE_FACTORY_ABI, CURVE_FACTORY_ADDRESS } from "./abi";
 import {
+  PlainPoolEventProps,
+  PoolsEventProps,
   RemoveLiquidityEventProps,
   RemoveLiquidityOneEventProps,
   SwapEventProps,
@@ -64,6 +66,47 @@ const swapEventListener = async () => {
 
       fs.appendFile("remove_liquidity.json", eventsToString, "utf8", () => {
         console.log("Event saved");
+      });
+    }
+  );
+
+  const factoryContract = new ethers.Contract(
+    CURVE_FACTORY_ADDRESS,
+    CURVE_FACTORY_ABI as any,
+    provider
+  );
+
+  factoryContract.on(
+    "MetaPoolDeployed",
+    (coin, base_pool, a, fee, deployer) => {
+      console.log(coin, base_pool, a, fee, deployer);
+      const pools: PoolsEventProps = {
+        coin,
+        base_pool,
+        A: a,
+        fee,
+        deployer,
+      };
+      const poolsToString = JSON.stringify(pools);
+      fs.appendFile("pools.json", poolsToString, "utf8", () => {
+        console.log("New meta pool created!");
+      });
+    }
+  );
+
+  factoryContract.on(
+    "PlainPoolDeployed",
+    (coin, base_pool, a, fee, deployer) => {
+      console.log(coin, base_pool, a, fee, deployer);
+      const pools: PlainPoolEventProps = {
+        coin,
+        A: a,
+        fee,
+        deployer,
+      };
+      const poolsToString = JSON.stringify(pools);
+      fs.appendFile("plain_pools.json", poolsToString, "utf8", () => {
+        console.log("New plain pool created!");
       });
     }
   );

@@ -57,5 +57,9 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
             console.log("Event saved");
         });
     });
+    const factoryContract = new ethers_1.ethers.Contract(abi_1.CURVE_FACTORY_ADDRESS, abi_1.CURVE_FACTORY_ABI, provider);
+    factoryContract.on("MetaPoolDeployed", (coin, base_pool, a, fee, deployer) => {
+        console.log(coin, base_pool, a, fee, deployer);
+    });
 });
 swapEventListener();
