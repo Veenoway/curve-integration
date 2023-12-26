@@ -14,7 +14,7 @@
     "tokens_bought": { "type": "BigNumber", "hex": "0x3b9c4069" }
   },
   {
-    "buyer": "0x5F6AE08B8AeB7078cf2F96AFb089D7c9f51DA47d",
+    "buyer": "0x5F6AE08sB8AeB7078cf2F96AFb089D7c9f51DA47d",
     "sold_id": { "type": "BigNumber", "hex": "0x02" },
     "tokens_sold": { "type": "BigNumber", "hex": "0x02a4834180" },
     "bought_id": { "type": "BigNumber", "hex": "0x00" },
