@@ -36,7 +36,7 @@ const swapEventListener = async () => {
       const eventsToString = JSON.stringify(events);
 
       fs.appendFile("events_curve.json", eventsToString, "utf8", () => {
-        console.log("Event saved");
+        console.log("Swap event detected");
       });
     }
   );
@@ -50,7 +50,7 @@ const swapEventListener = async () => {
     const eventsToString = JSON.stringify(events);
 
     fs.appendFile("remove_liquidity_one.json", eventsToString, "utf8", () => {
-      console.log("Event saved");
+      console.log("Remove liquidity one detected");
     });
   });
 
@@ -66,7 +66,7 @@ const swapEventListener = async () => {
       const eventsToString = JSON.stringify(events);
 
       fs.appendFile("remove_liquidity.json", eventsToString, "utf8", () => {
-        console.log("Event saved");
+        console.log("Remove Liquidity detected");
       });
     }
   );
