@@ -1,7 +1,11 @@
 import { ethers } from "ethers";
 import fs from "fs";
 import { CURVE_ABI } from "./abi";
-import { SwapEventProps } from "./interface";
+import {
+  RemoveLiquidityEventProps,
+  RemoveLiquidityOneEventProps,
+  SwapEventProps,
+} from "./interface";
 require("dotenv").config();
 
 const provider = new ethers.providers.JsonRpcProvider(
@@ -34,31 +38,35 @@ const swapEventListener = async () => {
     }
   );
 
-  // const filter = {
-  //   address: null,
-  //   topics: [
-  //     ethers.utils.id(
-  //       "TokenExchange(address,address,address,address,address,uint256,uint256)"
-  //     ),
-  //   ],
-  // };
+  contract.on("RemoveLiquidityOne", (provider, token_amount, coin_amount) => {
+    const events: RemoveLiquidityOneEventProps = {
+      provider,
+      token_amount,
+      coin_amount,
+    };
+    const eventsToString = JSON.stringify(events);
 
-  // console.log("blockNumber", blockNumber);
+    fs.appendFile("remove_liquidity_one.json", eventsToString, "utf8", () => {
+      console.log("Event saved");
+    });
+  });
 
-  // provider.getLogs(filter).then((logs) => {
-  //   console.log("logs", logs);
-  //   logs.forEach((log) => {
-  //     const event = ethers.utils.defaultAbiCoder.decode(
-  //       ["address", "uint256", "address", "uint256", "uint256"],
-  //       log.data
-  //     );
-  //     console.log("TokenExchange", event);
-  //     fs.appendFile("events_curve.json", JSON.stringify(event), "utf8", () => {
-  //       console.log("Event saved");
-  //     });
-  //     // Votre logique d'enregistrement ici
-  //   });
-  // });
+  contract.on(
+    "RemoveLiquidity",
+    (provider, token_amounts, fees, token_supply) => {
+      const events: RemoveLiquidityEventProps = {
+        provider,
+        token_amounts,
+        fees,
+        token_supply,
+      };
+      const eventsToString = JSON.stringify(events);
+
+      fs.appendFile("remove_liquidity.json", eventsToString, "utf8", () => {
+        console.log("Event saved");
+      });
+    }
+  );
 };
 
 swapEventListener();
