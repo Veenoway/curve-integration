@@ -1,0 +1,22 @@
+[
+  {
+    "provider": "0xd632f22692FaC7611d2AA1C0D552930D43CAEd3B",
+    "token_amount": { "type": "BigNumber", "hex": "0x061c0a9feb04946dcd8a" },
+    "coin_amount": { "type": "BigNumber", "hex": "0x0648e574c2e39d4535bf" }
+  },
+  {
+    "provider": "0x618788357D0EBd8A37e763ADab3bc575D54c2C7d",
+    "token_amount": { "type": "BigNumber", "hex": "0x93af7df65f5ef29b0f" },
+    "coin_amount": { "type": "BigNumber", "hex": "0xa700b2a4" }
+  },
+  {
+    "provider": "0x618788357D0EBd8A37e763ADab3bc575D54c2C7d",
+    "token_amount": { "type": "BigNumber", "hex": "0x41619b8c8fc8ed254e" },
+    "coin_amount": { "type": "BigNumber", "hex": "0x49eee148" }
+  },
+  {
+    "provider": "0x618788357D0EBd8A37e763ADab3bc575D54c2C7d",
+    "token_amount": { "type": "BigNumber", "hex": "0xb8828e43ba376337fd" },
+    "coin_amount": { "type": "BigNumber", "hex": "0xd0afb25a" }
+  }
+]

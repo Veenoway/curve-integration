@@ -34,28 +34,28 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
             console.log("Event saved");
         });
     });
-    // const filter = {
-    //   address: null,
-    //   topics: [
-    //     ethers.utils.id(
-    //       "TokenExchange(address,address,address,address,address,uint256,uint256)"
-    //     ),
-    //   ],
-    // };
-    // console.log("blockNumber", blockNumber);
-    // provider.getLogs(filter).then((logs) => {
-    //   console.log("logs", logs);
-    //   logs.forEach((log) => {
-    //     const event = ethers.utils.defaultAbiCoder.decode(
-    //       ["address", "uint256", "address", "uint256", "uint256"],
-    //       log.data
-    //     );
-    //     console.log("TokenExchange", event);
-    //     fs.appendFile("events_curve.json", JSON.stringify(event), "utf8", () => {
-    //       console.log("Event saved");
-    //     });
-    //     // Votre logique d'enregistrement ici
-    //   });
-    // });
+    contract.on("RemoveLiquidityOne", (provider, token_amount, coin_amount) => {
+        const events = {
+            provider,
+            token_amount,
+            coin_amount,
+        };
+        const eventsToString = JSON.stringify(events);
+        fs_1.default.appendFile("remove_liquidity_one.json", eventsToString, "utf8", () => {
+            console.log("Event saved");
+        });
+    });
+    contract.on("RemoveLiquidity", (provider, token_amounts, fees, token_supply) => {
+        const events = {
+            provider,
+            token_amounts,
+            fees,
+            token_supply,
+        };
+        const eventsToString = JSON.stringify(events);
+        fs_1.default.appendFile("remove_liquidity.json", eventsToString, "utf8", () => {
+            console.log("Event saved");
+        });
+    });
 });
 swapEventListener();
