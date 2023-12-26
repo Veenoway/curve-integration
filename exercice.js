@@ -15,57 +15,47 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ethers_1 = require("ethers");
 const fs_1 = __importDefault(require("fs"));
 const abi_1 = require("./abi");
-const utils_1 = require("./utils");
 require("dotenv").config();
-const provider = new ethers_1.ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`);
+const provider = new ethers_1.ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${process.env.INFURA_ID}`);
 const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
     const blockNumber = yield provider.getBlockNumber();
-    const contract = new ethers_1.ethers.Contract(abi_1.CURVE_FACTORY_ADDRESS, abi_1.CURVE_ABI, provider);
-    contract.on("Swap", (sender, amount0In, amount1In, amount0Out, amount1Out, to) => {
-        const events = {
-            sender,
-            amount0In,
-            amount1In,
-            amount0Out,
-            amount1Out,
-            to,
-        };
-        const swapEvent = JSON.stringify(events);
-        const inAmount = (0, utils_1.getAmount)(amount0In, amount1In);
-        const outAmount = (0, utils_1.getAmount)(amount0Out, amount1Out);
-        fs_1.default.appendFile("swap.json", swapEvent + ",", (err) => {
-            if (err)
-                throw err;
-            if (utils_1.routerName[sender])
-                (0, utils_1.getLog)("Swap has been recorded from: ", inAmount, outAmount, sender);
-            else if (utils_1.routerName[to])
-                (0, utils_1.getLog)("Swap has been recorded to: ", inAmount, outAmount, to);
-            else
-                (0, utils_1.getLog)("Swap event saved! ", inAmount, outAmount);
+    const CURVE_PAIR_ADDRESS = "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7";
+    const contract = new ethers_1.ethers.Contract(CURVE_PAIR_ADDRESS, abi_1.CURVE_ABI, provider);
+    // { type: "address", name: "buyer", indexed: true },
+    // { type: "int128", name: "sold_id", indexed: false },
+    // { type: "uint256", name: "tokens_sold", indexed: false },
+    // { type: "int128", name: "bought_id", indexed: false },
+    // { type: "uint256", name: "tokens_bought", indexed: false },
+    contract.on("TokenExchange", (events) => {
+        console.log("TokenExchange", events);
+        fs_1.default.appendFile("events_curve.json", JSON.stringify({
+            events,
+        }), "utf8", () => {
+            console.log("Event saved");
         });
     });
-    contract.on("Swap", (sender, amount0In, amount1In, amount0Out, amount1Out, to) => {
-        const events = {
-            sender,
-            amount0In,
-            amount1In,
-            amount0Out,
-            amount1Out,
-            to,
-        };
-        const swapEvent = JSON.stringify(events);
-        const inAmount = (0, utils_1.getAmount)(amount0In, amount1In);
-        const outAmount = (0, utils_1.getAmount)(amount0Out, amount1Out);
-        fs_1.default.appendFile("swap.json", swapEvent + ",", (err) => {
-            if (err)
-                throw err;
-            if (utils_1.routerName[sender])
-                (0, utils_1.getLog)("Swap has been recorded from: ", inAmount, outAmount, sender);
-            else if (utils_1.routerName[to])
-                (0, utils_1.getLog)("Swap has been recorded to: ", inAmount, outAmount, to);
-            else
-                (0, utils_1.getLog)("Swap event saved! ", inAmount, outAmount);
-        });
-    });
+    // const filter = {
+    //   address: null,
+    //   topics: [
+    //     ethers.utils.id(
+    //       "TokenExchange(address,address,address,address,address,uint256,uint256)"
+    //     ),
+    //   ],
+    // };
+    // console.log("blockNumber", blockNumber);
+    // provider.getLogs(filter).then((logs) => {
+    //   console.log("logs", logs);
+    //   logs.forEach((log) => {
+    //     const event = ethers.utils.defaultAbiCoder.decode(
+    //       ["address", "uint256", "address", "uint256", "uint256"],
+    //       log.data
+    //     );
+    //     console.log("TokenExchange", event);
+    //     fs.appendFile("events_curve.json", JSON.stringify(event), "utf8", () => {
+    //       console.log("Event saved");
+    //     });
+    //     // Votre logique d'enregistrement ici
+    //   });
+    // });
 });
 swapEventListener();
