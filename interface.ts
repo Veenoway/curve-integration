@@ -1,8 +1,7 @@
 export interface SwapEventProps {
-  sender: string;
-  amount0In: string;
-  amount1In: string;
-  amount0Out: string;
-  amount1Out: string;
-  to: string;
+  buyer: string;
+  sold_id: number;
+  tokens_sold: string;
+  bought_id: number;
+  tokens_bought: string;
 }

@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import fs from "fs";
 import { CURVE_ABI } from "./abi";
+import { SwapEventProps } from "./interface";
 require("dotenv").config();
 
 const provider = new ethers.providers.JsonRpcProvider(
@@ -14,24 +15,24 @@ const swapEventListener = async () => {
     CURVE_ABI as any,
     provider
   );
-  // { type: "address", name: "buyer", indexed: true },
-  // { type: "int128", name: "sold_id", indexed: false },
-  // { type: "uint256", name: "tokens_sold", indexed: false },
-  // { type: "int128", name: "bought_id", indexed: false },
-  // { type: "uint256", name: "tokens_bought", indexed: false },
-  contract.on("TokenExchange", (events) => {
-    console.log("TokenExchange", events);
-    fs.appendFile(
-      "events_curve.json",
-      JSON.stringify({
-        events,
-      }),
-      "utf8",
-      () => {
+
+  contract.on(
+    "TokenExchange",
+    (buyer, sold_id, tokens_sold, bought_id, tokens_bought) => {
+      const events: SwapEventProps = {
+        buyer,
+        sold_id,
+        tokens_sold,
+        bought_id,
+        tokens_bought,
+      };
+      const eventsToString = JSON.stringify(events);
+
+      fs.appendFile("events_curve.json", eventsToString, "utf8", () => {
         console.log("Event saved");
-      }
-    );
-  });
+      });
+    }
+  );
 
   // const filter = {
   //   address: null,
