@@ -204,3 +204,36 @@ gsap.fromTo(
     },
   }
 );
+
+const thirdTimeLine = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".third-box",
+    start: "center 40%",
+    end: "center -30%",
+    markers: true,
+    scrub: true,
+    toggleActions: "restart none none none",
+    //          onEnter, onLeave, onEnterBack, onLeaveBack
+    // options: play, pause, resume, reset, restart, complete, reverse, none
+  },
+});
+
+thirdTimeLine.to(".logo", {
+  y: "+=600",
+  x: "+=250",
+  scale: "+=0.3",
+  rotate: "+=180",
+  duration: 6,
+});
+
+thirdTimeLine.to(
+  ".logo",
+  {
+    y: "+=200",
+    x: "+=150",
+    scale: "-=0.4",
+    rotate: "+=180",
+    duration: 6,
+  },
+  ">=0"
+);

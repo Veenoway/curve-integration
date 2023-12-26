@@ -1,0 +1,62 @@
+[
+  {
+    "provider": "0xd632f22692FaC7611d2AA1C0D552930D43CAEd3B",
+    "token_amounts": [
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x01a57c2ee7" }
+    ],
+    "fees": [
+      { "type": "BigNumber", "hex": "0x01662dc5a7e76e53" },
+      { "type": "BigNumber", "hex": "0x017af8" },
+      { "type": "BigNumber", "hex": "0x03049f" }
+    ],
+    "invariant": { "type": "BigNumber", "hex": "0x99c8ebda3c47df087b3d30" },
+    "token_supply": { "type": "BigNumber", "hex": "0x958008e4dd64252a3019a2" }
+  },
+  {
+    "provider": "0xc273fd237F23cb13296D0Cc2897F0B7A61e83387",
+    "token_amounts": [
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x11a6250a08" }
+    ],
+    "fees": [
+      { "type": "BigNumber", "hex": "0x0eef07ebd96dd4c9" },
+      { "type": "BigNumber", "hex": "0x0fe732" },
+      { "type": "BigNumber", "hex": "0x2050e2" }
+    ],
+    "invariant": { "type": "BigNumber", "hex": "0x99d8fac8c7ef0403abbef4" },
+    "token_supply": { "type": "BigNumber", "hex": "0x958fa404d34616a7592810" }
+  },
+  {
+    "provider": "0x97C1A26482099363cb055f0F3Ca1D6057Fe55447",
+    "token_amounts": [
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x25338e57" },
+      { "type": "BigNumber", "hex": "0x00" }
+    ],
+    "fees": [
+      { "type": "BigNumber", "hex": "0x1f75d3db3b498e" },
+      { "type": "BigNumber", "hex": "0x39e5" },
+      { "type": "BigNumber", "hex": "0x174c" }
+    ],
+    "invariant": { "type": "BigNumber", "hex": "0x99d2bc2e5552325f2b6805" },
+    "token_supply": { "type": "BigNumber", "hex": "0x958991e2c9323608894138" }
+  },
+  {
+    "provider": "0xAA5A67c256e27A5d80712c51971408db3370927D",
+    "token_amounts": [
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x00" },
+      { "type": "BigNumber", "hex": "0x70b7b817" }
+    ],
+    "fees": [
+      { "type": "BigNumber", "hex": "0x5f57e33cb025cc" },
+      { "type": "BigNumber", "hex": "0x659e" },
+      { "type": "BigNumber", "hex": "0xce67" }
+    ],
+    "invariant": { "type": "BigNumber", "hex": "0x99d29a59ec9ae0a7f0a4fb" },
+    "token_supply": { "type": "BigNumber", "hex": "0x958970ff5be61bf52c9e95" }
+  }
+]

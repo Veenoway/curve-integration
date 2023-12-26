@@ -32,6 +32,14 @@ body {
   align-items: center;
   /* background-color: red; */
 }
+.fourth-box {
+  /* background-color: orange; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: red; */
+}
 
 .square {
   background-color: green;
@@ -107,4 +115,28 @@ body {
   width: 50%;
   display: flex;
   flex-direction: column;
+}
+
+.description-last,
+.subtitle-last {
+  font-family: "Lobster", sans-serif;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.subtitle-last {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 72px;
+  line-height: 50px;
+  margin-bottom: 15px;
+  margin-top: 300px;
+  margin-right: 0px;
+}
+
+.description-last {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 24px;
+  letter-spacing: 1px;
+  line-height: 25px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

@@ -31,7 +31,7 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
         };
         const eventsToString = JSON.stringify(events);
         fs_1.default.appendFile("events_curve.json", eventsToString, "utf8", () => {
-            console.log("Event saved");
+            console.log("Swap event detected");
         });
     });
     contract.on("RemoveLiquidityOne", (provider, token_amount, coin_amount) => {
@@ -42,7 +42,7 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
         };
         const eventsToString = JSON.stringify(events);
         fs_1.default.appendFile("remove_liquidity_one.json", eventsToString, "utf8", () => {
-            console.log("Event saved");
+            console.log("Remove liquidity one detected");
         });
     });
     contract.on("RemoveLiquidity", (provider, token_amounts, fees, token_supply) => {
@@ -54,7 +54,20 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
         };
         const eventsToString = JSON.stringify(events);
         fs_1.default.appendFile("remove_liquidity.json", eventsToString, "utf8", () => {
-            console.log("Event saved");
+            console.log("Remove Liquidity detected");
+        });
+    });
+    contract.on("AddLiquidity", (provider, token_amounts, fees, invariant, token_supply) => {
+        const events = {
+            provider,
+            token_amounts,
+            fees,
+            invariant,
+            token_supply,
+        };
+        const eventsToString = JSON.stringify(events);
+        fs_1.default.appendFile("add_liquidity.json", eventsToString, "utf8", () => {
+            console.log("Liquidity added");
         });
     });
     const factoryContract = new ethers_1.ethers.Contract(abi_1.CURVE_FACTORY_ADDRESS, abi_1.CURVE_FACTORY_ABI, provider);
