@@ -71,6 +71,18 @@ const swapEventListener = () => __awaiter(void 0, void 0, void 0, function* () {
         });
     });
     const factoryContract = new ethers_1.ethers.Contract(abi_1.CURVE_FACTORY_ADDRESS, abi_1.CURVE_FACTORY_ABI, provider);
+    const filter = {
+        address: null,
+        topics: [
+            ethers_1.ethers.utils.id("TokenExchange(address,uint256,uint256,uint256,uint256)"),
+            ethers_1.ethers.utils.id("RemoveLiquidityOne(address,uint256,uint256)"),
+            ethers_1.ethers.utils.id("RemoveLiquidity(address,uint256[4],uint256[4],uint256)"),
+            ethers_1.ethers.utils.id("AddLiquidity(address,uint256[4],uint256[4],uint256,uint256)"),
+            ethers_1.ethers.utils.id("MetaPoolDeployed(address,address,uint256,uint256)"),
+            ethers_1.ethers.utils.id("PlainPoolDeployed(address,uint256,uint256,uint256)"),
+        ],
+    };
+    console.log("filter", filter);
     factoryContract.on("MetaPoolDeployed", (coin, base_pool, a, fee, deployer) => {
         console.log(coin, base_pool, a, fee, deployer);
         const pools = {
