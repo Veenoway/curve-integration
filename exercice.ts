@@ -96,22 +96,6 @@ const swapEventListener = async () => {
     provider
   );
 
-  const filter = {
-    address: null,
-    topics: [
-      ethers.utils.id("TokenExchange(address,uint256,uint256,uint256,uint256)"),
-      ethers.utils.id("RemoveLiquidityOne(address,uint256,uint256)"),
-      ethers.utils.id("RemoveLiquidity(address,uint256[4],uint256[4],uint256)"),
-      ethers.utils.id(
-        "AddLiquidity(address,uint256[4],uint256[4],uint256,uint256)"
-      ),
-      ethers.utils.id("MetaPoolDeployed(address,address,uint256,uint256)"),
-      ethers.utils.id("PlainPoolDeployed(address,uint256,uint256,uint256)"),
-    ],
-  };
-
-  console.log("filter", filter);
-
   factoryContract.on(
     "MetaPoolDeployed",
     (coin, base_pool, a, fee, deployer) => {
