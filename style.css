@@ -17,28 +17,22 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* background-color: blue; */
 }
 
 .second-box {
-  /* background-color: orange; */
   display: flex;
   align-items: center;
 }
 
 .third-box {
-  /* background-color: orange; */
   display: flex;
   align-items: center;
-  /* background-color: red; */
 }
 .fourth-box {
-  /* background-color: orange; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* background-color: red; */
 }
 
 .square {
