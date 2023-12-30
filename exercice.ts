@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import fs from "fs";
 import { CURVE_ABI, CURVE_FACTORY_ABI, CURVE_FACTORY_ADDRESS } from "./abi";
 import {
-  LiquidityDepositEventProps,
   PlainPoolEventProps,
   PoolsEventProps,
   RemoveLiquidityEventProps,
@@ -63,25 +62,6 @@ const swapEventListener = async () => {
 
       fs.appendFile("remove_liquidity.json", eventsToString, "utf8", () => {
         console.log("Remove Liquidity detected");
-      });
-    }
-  );
-
-  contract.on(
-    "AddLiquidity",
-    (provider, token_amounts, fees, invariant, token_supply) => {
-      const events: LiquidityDepositEventProps = {
-        provider,
-        token_amounts,
-        fees,
-        invariant,
-        token_supply,
-      };
-
-      const eventsToString = JSON.stringify(events);
-
-      fs.appendFile("add_liquidity.json", eventsToString, "utf8", () => {
-        console.log("Liquidity added");
       });
     }
   );
