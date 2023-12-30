@@ -34,10 +34,6 @@ const swapEventListener = async () => {
         tokens_bought,
       };
       const eventsToString = JSON.stringify(events);
-
-      fs.appendFile("events_curve.json", eventsToString, "utf8", () => {
-        console.log("Swap event detected");
-      });
     }
   );
 
