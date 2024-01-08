@@ -32,6 +32,8 @@ const swapEventListener = async () => {
         bought_id,
         tokens_bought,
       };
+      const eventsToString = JSON.stringify(events);
+      console.log("eventsToString", eventsToString);
     }
   );
 
